@@ -1,17 +1,29 @@
-import os
-
+from query_utils import query_builder
+from flask import request, jsonify
+from requests import BatchRequest
+from marshmallow import ValidationError
 from flask import Flask
 
 app = Flask(__name__)
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "data")
 
-
-@app.route("/perform_query")
+@app.route("/perform_query", methods=["POST"])
 def perform_query():
-    # получить параметры query и file_name из request.args, при ошибке вернуть ошибку 400
-    # проверить, что файла file_name существует в папке DATA_DIR, при ошибке вернуть ошибку 400
-    # с помощью функционального программирования (функций filter, map), итераторов/генераторов сконструировать запрос
-    # вернуть пользователю сформированный результат
-    return app.response_class('', content_type="text/plain")
+    input_data = request.json
+    try:
+        params = BatchRequest().load(data=input_data)
+    except ValidationError as error:
+        return jsonify(error.messages), 400
+
+    res = None
+    for query in params['queries']:
+        res = query_builder(
+            cmd=query['cmd'],
+            value=query['value'],
+            data=res
+        )
+    return jsonify(res)
+
+
+if __name__ == "__main__":
+    app.run()
