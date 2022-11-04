@@ -23,7 +23,7 @@ def query_builder(cmd, value, data):
     else:
         read_file = data
     res = CMD_TO_FUNCTION[cmd](param=value, data=read_file)
-    return res
+    return list(res)
 
 
 

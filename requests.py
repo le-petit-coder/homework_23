@@ -11,7 +11,6 @@ class Request(Schema):
     def validate_param(self, values, *args, **kwargs):
         if values['cmd'] not in CORRECT_CMD:
             raise ValidationError("your request does not match the requirements")
-        # return values
 
 
 class BatchRequest(Schema):

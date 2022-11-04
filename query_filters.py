@@ -7,7 +7,7 @@ def map_data(param, data):
     return map(lambda x: x.split(' ')[number_colom], data)
 
 
-def unique_data(data: str):
+def unique_data(data: str, param = None):
     return set(data)
 
 
