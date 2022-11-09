@@ -1,4 +1,4 @@
-from query_filters import filter_data, map_data, unique_data, sorted_data, limit_data
+from query_filters import filter_data, map_data, unique_data, sorted_data, limit_data, regex_data
 
 FILE_NAME = 'data/apache_logs.txt'
 
@@ -7,7 +7,8 @@ CMD_TO_FUNCTION = {
     "map": map_data,
     "unique": unique_data,
     "sort": sorted_data,
-    "limit": limit_data
+    "limit": limit_data,
+    "regex": regex_data
 }
 
 
