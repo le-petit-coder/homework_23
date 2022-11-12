@@ -24,6 +24,6 @@ def limit_data(param: str, data: str) -> List:
     return list(data)[:limit_num]
 
 
-def regex_data(pattern, data):
-    regex = re.compile(pattern)
-    return regex.findall(data)
+def regex_data(param, data):
+    regex = re.compile(param)
+    return regex.search(data)
