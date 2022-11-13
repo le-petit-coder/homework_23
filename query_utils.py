@@ -1,4 +1,5 @@
 from query_filters import filter_data, map_data, unique_data, sorted_data, limit_data, regex_data
+from typing import List, Generator
 
 FILE_NAME = 'data/apache_logs.txt'
 
@@ -12,13 +13,13 @@ CMD_TO_FUNCTION = {
 }
 
 
-def iter_file(data):
+def iter_file(data) -> Generator:
     with open(data) as file:
         for line in file:
             yield line
 
 
-def query_builder(cmd, value, data):
+def query_builder(cmd, value, data) -> List[str]:
     if data is None:
         read_file = iter_file(FILE_NAME)
     else:

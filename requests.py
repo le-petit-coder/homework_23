@@ -8,7 +8,7 @@ class Request(Schema):
     value = fields.Str(required=True)
 
     @validates_schema()
-    def validate_param(self, values, *args, **kwargs):
+    def validate_param(self, values, *args, **kwargs) -> None:
         if values['cmd'] not in CORRECT_CMD:
             raise ValidationError("your request does not match the requirements")
 
